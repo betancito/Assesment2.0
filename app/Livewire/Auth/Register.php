@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
 
 class Register extends Component
 {
@@ -31,6 +32,8 @@ class Register extends Component
         if ($this->role === 'doctor') {
             return redirect()->route('doctor.create', ['user_id' => $user->id]);
         }
+
+        auth()->login($user);
 
         return redirect()->route('dashboard');
 

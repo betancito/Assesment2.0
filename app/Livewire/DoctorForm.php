@@ -14,10 +14,16 @@ class DoctorForm extends Component
     public $specialty;
     public $phone;
 
+        public function mount($user_id)
+    {
+        $user = User::findOrFail($user_id);
+        $this->user_id = $user->id;
+    }
+
     public function create($user_id)
     {
         $user = User::findOrFail($user_id);
-        $this->user_id = $user->id; // Set the user_id property
+        $this->user_id = $user->id;
         return view('livewire.doctor-form', compact('user'))->layout('layouts.app');
     }
 
@@ -47,6 +53,6 @@ class DoctorForm extends Component
 
     public function render()
     {
-        return view('livewire.doctor-form')->layout('layouts.guest');
+        return view('livewire.doctor-form')->layout('layouts.app');
     }
 }

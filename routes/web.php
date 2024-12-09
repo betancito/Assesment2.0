@@ -6,6 +6,7 @@ use App\Livewire\PatientIndex;
 use App\Livewire\Auth\Register;
 use App\Livewire\DoctorForm;
 
+
 Route::get('/register', Register::class)->name('register');
 
 Route::get('/', function () {
@@ -20,6 +21,10 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::get('/doctor/create/{user_id}', DoctorForm::class)->name('doctor.create');
+    Route::post('/doctor/store', [DoctorForm::class, 'store'])->name('doctor.store');
+
 });
 
 //Patient Routes
@@ -29,5 +34,3 @@ Route::get('/patients/{id}/edit', PatientForm::class)->name('patients.edit');
 
 
 //Doctor Routes
-Route::get('/doctor/create/{user_id}', [DoctorForm::class, 'create'])->name('doctor.create');
-Route::post('/doctor/store', [DoctorForm::class, 'store'])->name('doctor.store');
