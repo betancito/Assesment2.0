@@ -1,32 +1,49 @@
-<div class="container mt-5">
-    <div class="card mx-auto" style="max-width: 600px;">
-        <div class="card-header bg-primary text-white">
-            <h4 class="mb-0">Doctor Information</h4>
-        </div>
-        <div class="card-body">
-            @if (session()->has('message'))
-                <div class="alert alert-success">
-                    {{ session('message') }}
-                </div>
-            @endif
-            <form wire:submit.prevent="submit">
-                <div class="mb-3">
-                    <label for="specialty" class="form-label">Specialty</label>
-                    <input type="text" id="specialty" class="form-control" wire:model="specialty">
-                    @error('specialty') <span class="text-danger">{{ $message }}</span> @enderror
-                </div>
-                <div class="mb-3">
-                    <label for="license_number" class="form-label">License Number</label>
-                    <input type="text" id="license_number" class="form-control" wire:model="license_number">
-                    @error('license_number') <span class="text-danger">{{ $message }}</span> @enderror
-                </div>
-                <div class="mb-3">
-                    <label for="experience_years" class="form-label">Years of Experience</label>
-                    <input type="number" id="experience_years" class="form-control" wire:model="experience_years">
-                    @error('experience_years') <span class="text-danger">{{ $message }}</span> @enderror
-                </div>
-                <button type="submit" class="btn btn-primary w-100">Save Details</button>
-            </form>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h2>Add Doctor Information</h2>
+
+        @if (session()->has('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <form wire:submit.prevent="store">
+            <input type="hidden" wire:model="user_id">
+
+            <div class="form-group">
+                <label for="specialty">Specialty</label>
+                <input type="text" id="specialty" wire:model="specialty" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="text" id="phone" wire:model="phone" class="form-control" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
     </div>
-</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
+
